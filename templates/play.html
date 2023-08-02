@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-8 col-md-6">
+                <h1 class="display-4 text-center cooplify mt-4" id="name"></h1>
+                <p class="text-center bi bi-quote" id="hint"></p>
+                <div class="container text-center" id="badges">
+
+                </div>
+
+                <table class="table text-center borderless" id="guessTable">
+                    <thead>
+                    <tr></tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <div class="input-group">
+                    <input id="current-guess" type="text" class="form-control" placeholder="Enter a guess" required>
+                    <div class="input-group-append">
+                        <button id="submit" class="btn btn-block btn-primary">Submit</button>
+                    </div>
+                </div>
+
+                <p class="text-center">You have <span id="remaining">?</span> guesses remaining.</p>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JS for game logic -->
+    <script>
+        // Construct base URL for backend requests
+        let baseUrl = window.location.protocol + '//' + window.location.host;
+        // Extract encoded game parameters from the URL
+        let encodedParams = new URLSearchParams(window.location.search).get('data');
+
+        // Fetch decoded game parameters from the backend
+        fetch(baseUrl + '/decode', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'encodedParams': encodedParams})
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Initialize game parameters with values received from the server
+                const name = data.name;
+                const word = data.word.toLowerCase();
+                const hint = data.hint;
+                const suffix = data.suffix;
+                const max_guesses = data.guesses;
+                let remaining = max_guesses;
+                let tbody = document.getElementById('guessTable').getElementsByTagName('tbody')[0];
+
+                // Create a blank line, to be used for initial guess display
+                const blank = "<span class=\"letter guess-out\"> </span>".repeat(word.length);
+
+                // Set the maximum length of the guess input
+                document.getElementById('current-guess').maxLength = word.length;
+
+                // Prefill the table with blank rows
+                for (let i = 0; i < remaining; i++) {
+                    let row = tbody.insertRow();
+                    let cell = row.insertCell();
+                    cell.innerHTML = blank; // fill with blank initially
+                }
+
+                // Fill out informative elements
+                if (suffix === 0) {
+                    document.getElementById('name').innerHTML = colorize(name);
+                } else {
+                    document.getElementById('name').innerHTML = colorize(name + "'s Coople");
+                }
+
+                if (hint == null) {
+                    document.getElementById('hint').textContent = "No hint provided.";
+                } else {
+                    document.getElementById('hint').textContent = hint;
+                }
+                document.getElementById('remaining').textContent = remaining;
+
+                // Define action on "Submit" button click
+                document.getElementById('submit').addEventListener('click', function () {
+
+                    // Get the guess from the input field
+                    let guess = document.getElementById('current-guess').value.toLowerCase();
+
+                    // Clear the guess input
+                    document.getElementById('current-guess').value = '';
+
+                    // Validate the input
+                    if (!guess || guess.length !== word.length) {
+                        alert('Invalid guess. Please enter a ' + word.length + '-letter word.');
+                        return;
+                    }
+
+                    // Decrease remaining guesses count
+                    remaining -= 1;
+                    // Update remaining guesses display
+                    document.getElementById('remaining').textContent = remaining;
+
+                    let result = '';
+                    // Build result string
+                    for (let i = 0; i < word.length; i++) {
+                        if (word[i] === guess[i]) {
+                            result += '<span class="letter guess-on">' + guess[i] + '</span>';
+                        } else if (word.includes(guess[i])) {
+                            result += '<span class="letter guess-in">' + guess[i] + '</span>';
+                        } else {
+                            result += '<span class="letter guess-out">' + guess[i] + '</span>';
+                        }
+                    }
+
+                    // Fill in the result in the first blank row
+                    tbody.children[data.guesses - remaining - 1].children[0].innerHTML = result;
+
+                    // Check for game over
+                    if (guess === word || remaining === 0) {
+                        // Disable inputs
+                        document.getElementById('submit').disabled = true;
+                        document.getElementById('current-guess').disabled = true;
+
+                        redirectToResults(guess === word, word, max_guesses - remaining);
+                    }
+                });
+
+                addAllBadges(word);
+            });
+
+        function redirectToResults(win, word, guesses) {
+            let resultsUrl = new URL(baseUrl + '/results');
+            resultsUrl.searchParams.append('win', win);
+            resultsUrl.searchParams.append('word', word);
+            resultsUrl.searchParams.append('guesses', guesses);
+
+            // This will redirect the user to results.html
+            window.location.href = resultsUrl.href;
+        }
+    </script>
+{% endblock %}

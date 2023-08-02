@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="position-relative">
+            <div class="jumbotron text-center p-5 bg-light rounded-3">
+                <p class="col-md-8 fs-4 mx-auto">The solution was...</p>
+                <h1 class="display-1 fw-bold cooplify text-wrap" id="word"></h1>
+                <h1 class="display-5 fw-bold" id="results-message"></h1>
+                <p class="col-md-8 fs-4 mx-auto">Guess the hidden word or phrase in limited tries. Use the hints and
+                    badges at the top to help you guess. Correct letters and characters turn green, correct but
+                    misplaced ones turn orange, and wrong ones turn gray. Are you ready to Coople?</p>
+                <a href="{{ url_for('daily') }}" class="btn btn-primary btn-coople btn-lg rounded-pill my-1"
+                   type="button">Daily Challenge</a>
+                <a href="{{ url_for('game') }}" class="btn btn-secondary btn-coople btn-lg rounded-pill my-1"
+                   type="button">Make Your Own</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let params = new URLSearchParams(window.location.search);
+
+        let win = params.get('win') === 'true';
+        let word = params.get('word');
+        let guesses = params.get('guesses');
+
+        document.getElementById('word').innerHTML = colorize(word);
+        if (win) {
+            document.getElementById('results-message').textContent = 'You solved the Coople in ' + guesses + ' tries.';
+        } else {
+            document.getElementById('results-message').textContent = 'You ran out of guesses.';
+        }
+    </script>
+
+{% endblock %}

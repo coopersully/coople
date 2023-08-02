@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="display-4 text-center cooplify mt-4" id="title"></h1>
+    <form method="POST" onsubmit="event.preventDefault(); generateUrl();">
+        <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="John Appleseed" required>
+        </div>
+        <div class="form-group">
+            <label for="word">Secret Word</label>
+            <input type="text" class="form-control" id="word" name="word" oninput="updateGuesses()"
+                   placeholder="Sunglasses" required>
+        </div>
+        <div class="form-group row">
+
+            <div class="col-sm-8">
+                <label for="guesses">Maximum Guesses Allowed</label>
+                <input type="number" class="form-control" id="guesses" name="guesses" value="5" disabled required>
+                <small class="form-text text-muted">Our algorithm ensures a fair game with custom guess counts.</small>
+            </div>
+
+            <div class="col-sm-4 align-self-center">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="customizeGuesses"
+                           onchange="customizeGuessesChange()">
+                    <label class="form-check-label" for="customizeGuesses">Customize Maximum Guesses Allowed</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="hint">Hint</label>
+            <input type="text" class="form-control" id="hint" name="hint"
+                   placeholder="They protect your eyes from the sun.">
+        </div>
+
+        <button type="button" class="btn btn-coople rounded-pill" onclick="generateUrl()">Generate Coople</button>
+
+        <div class="form-group mt-4">
+            <label for="gameUrl">Your Coople's URL</label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="gameUrl" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" onclick="copyUrl()" type="button"><i class="fas fa-copy"></i>
+                    </button>
+                    <button class="btn btn-primary" onclick="visitUrl()" type="button"><i
+                            class="fas fa-external-link-alt"></i></button>
+                </div>
+            </div>
+            <small class="form-text text-muted">If you make changes, be sure to re-generate your Coople's link above.</small>
+        </div>
+    </form>
+
+    <div class="container text-center" id="badges">
+
+    <script>
+
+        document.getElementById("title").innerHTML = colorize("Create A Coople");
+
+        let customizingGuesses = false;
+
+        function updateGuesses() {
+            const word = document.getElementById('word').value;
+            calculateBadges(word);
+            if (!customizingGuesses) {
+                document.getElementById('guesses').value = word.trim().length + 1;
+            }
+        }
+
+        function customizeGuessesChange() {
+            customizingGuesses = document.getElementById('customizeGuesses').checked;
+            if (customizingGuesses) {
+                document.getElementById('guesses').disabled = false;
+                document.getElementById('guesses').value = '';
+            } else {
+                document.getElementById('guesses').disabled = true;
+                updateGuesses();
+            }
+        }
+
+        function generateUrl() {
+            let nameInput = document.getElementById('name');
+            let wordInput = document.getElementById('word');
+            let guessesInput = document.getElementById('guesses');
+            let isValid = true;
+
+            if (!nameInput.value) {
+                nameInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                nameInput.classList.remove('is-invalid');
+            }
+
+            if (!wordInput.value) {
+                wordInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                wordInput.classList.remove('is-invalid');
+            }
+
+            if (!guessesInput.value) {
+                guessesInput.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                guessesInput.classList.remove('is-invalid');
+            }
+
+            if (isValid) {
+                let baseUrl = window.location.protocol + '//' + window.location.host;
+                let playUrl = baseUrl + '/play';
+
+                let name = nameInput.value.trim();
+                let word = wordInput.value.toLowerCase().trim();
+                let guesses = guessesInput.value;
+                let hint = document.getElementById('hint').value;
+
+                let params = {
+                    'name': name,
+                    'word': word,
+                    'guesses': guesses,
+                    'hint': hint,
+                    'suffix': 1
+                };
+
+                fetch(baseUrl + '/encode', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(params)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('gameUrl').value = playUrl + '?data=' + data.encodedParams;
+                    });
+            }
+        }
+
+        function copyUrl() {
+            let copyText = document.getElementById("gameUrl");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand("copy");
+            alert("Your custom Coople's url was copied to your clipboard.");
+        }
+
+        function visitUrl() {
+            let url = document.getElementById("gameUrl").value;
+            window.open(url, '_blank');
+        }
+
+
+    </script>
+
+{% endblock %}
