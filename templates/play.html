@@ -10,7 +10,7 @@
 
                 </div>
 
-                <table class="table text-center letter-table" id="guessTable">
+                <table class="table letter-table text-center align-bottom" id="guessTable">
                     <thead>
                     <tr></tr>
                     </thead>
@@ -65,7 +65,7 @@
                 const submitBtnEl = document.getElementById('submit');
 
                 // Create a blank line, to be used for initial guess display
-                const blank = "<span class=\"letter guess-out\"> </span>".repeat(word.length);
+                const blank = "<span class=\"letter guess-out\">&nbsp;</span>".repeat(word.length);
 
                 // Set the maximum length of the guess input
                 currentGuessEl.maxLength = word.length;
@@ -117,6 +117,9 @@
                         const spanClass = correctIndices[i] ? "guess-on" : (remainingWord.includes(guess[i]) ? "guess-in" : "guess-out");
                         result += `<span class="letter ${spanClass}">${guess[i]}</span>`;
                     }
+
+                    // Replace spaces with non-breaking spaces
+                    result = result.replace('> <', '>&nbsp;<');
 
                     // Fill in the result in the first blank row
                     guessTableBodyEl.children[maxGuesses - remaining - 1].children[0].innerHTML = result;
