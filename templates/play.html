@@ -33,132 +33,110 @@
     <!-- Game logic -->
     <script>
         // Construct base URL for backend requests
-        let baseUrl = window.location.protocol + '//' + window.location.host;
+        const baseUrl = `${window.location.protocol}//${window.location.host}`;
+
         // Extract encoded game parameters from the URL
-        let encodedParams = new URLSearchParams(window.location.search).get('data');
+        const encodedParams = new URLSearchParams(window.location.search).get('data');
+
+        // Helper function to replace a character at a certain index in a string
+        String.prototype.replaceAt = function (index, replacement) {
+            return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+        };
 
         // Fetch decoded game parameters from the backend
-        fetch(baseUrl + '/decode', {
+        fetch(`${baseUrl}/decode`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({'encodedParams': encodedParams})
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({encodedParams})
         })
             .then(response => response.json())
             .then(data => {
                 // Initialize game parameters with values received from the server
-                const name = data.name;
-                const word = data.word.toLowerCase();
-                const hint = data.hint;
-                const suffix = data.suffix;
-                const max_guesses = data.guesses;
-                let remaining = max_guesses;
-                let tbody = document.getElementById('guessTable').getElementsByTagName('tbody')[0];
+                const {name, word: originalWord, hint, suffix, guesses: maxGuesses} = data;
+                const word = originalWord.toLowerCase();
+                let remaining = maxGuesses;
+
+                // Cache DOM elements for further use
+                const currentGuessEl = document.getElementById('current-guess');
+                const guessTableBodyEl = document.getElementById('guessTable').getElementsByTagName('tbody')[0];
+                const nameEl = document.getElementById('name');
+                const hintEl = document.getElementById('hint');
+                const remainingEl = document.getElementById('remaining');
+                const submitBtnEl = document.getElementById('submit');
 
                 // Create a blank line, to be used for initial guess display
                 const blank = "<span class=\"letter guess-out\"> </span>".repeat(word.length);
 
                 // Set the maximum length of the guess input
-                document.getElementById('current-guess').maxLength = word.length;
+                currentGuessEl.maxLength = word.length;
 
                 // Prefill the table with blank rows
                 for (let i = 0; i < remaining; i++) {
-                    let row = tbody.insertRow();
-                    let cell = row.insertCell();
-                    cell.innerHTML = blank; // fill with blank initially
+                    const row = guessTableBodyEl.insertRow();
+                    row.insertCell().innerHTML = blank; // fill with blank initially
                 }
 
-                // Fill out informative elements
-                if (suffix === 0) {
-                    document.getElementById('name').innerHTML = colorize(name);
-                } else {
-                    document.getElementById('name').innerHTML = colorize(name + "'s Coople");
-                }
+                // Update name and hint elements
+                nameEl.innerHTML = colorize(suffix === 0 ? name : `${name}'s Coople`);
+                hintEl.textContent = hint ?? "No hint provided.";
 
-                if (hint == null) {
-                    document.getElementById('hint').textContent = "No hint provided.";
-                } else {
-                    document.getElementById('hint').textContent = hint;
-                }
-                document.getElementById('remaining').textContent = remaining;
+                // Update remaining guesses display
+                remainingEl.textContent = remaining;
 
                 // Define action on "Submit" button click
-                document.getElementById('submit').addEventListener('click',
-                    function () {
+                submitBtnEl.addEventListener('click', function () {
+                    // Get the guess from the input field and clear the input
+                    const guess = currentGuessEl.value.toLowerCase();
+                    currentGuessEl.value = '';
 
-                        // Get the guess from the input field
-                        let guess = document.getElementById('current-guess').value.toLowerCase();
+                    // Validate the input
+                    if (!guess || guess.length !== word.length) {
+                        alert(`Invalid guess. Please enter a ${word.length}-letter word.`);
+                        return;
+                    }
 
-                        // Clear the guess input
-                        document.getElementById('current-guess').value = '';
+                    // Decrease remaining guesses count and update the display
+                    remaining--;
+                    remainingEl.textContent = remaining;
 
-                        // Validate the input
-                        if (!guess || guess.length !== word.length) {
-                            alert('Invalid guess. Please enter a ' + word.length + '-letter word.');
-                            return;
+                    // Initialize variables for result string creation
+                    let result = '';
+                    let remainingWord = word;
+                    const correctIndices = new Array(word.length).fill(false);
+
+                    // Identify correct guesses and update remaining word
+                    for (let i = 0; i < word.length; i++) {
+                        if (remainingWord[i] === guess[i]) {
+                            correctIndices[i] = true;
+                            remainingWord = remainingWord.replaceAt(i, '?');
                         }
+                    }
 
-                        // Decrease remaining guesses count
-                        remaining -= 1;
-                        // Update remaining guesses display
-                        document.getElementById('remaining').textContent = remaining;
+                    // Build the result string based on the guesses
+                    for (let i = 0; i < word.length; i++) {
+                        const spanClass = correctIndices[i] ? "guess-on" : (remainingWord.includes(guess[i]) ? "guess-in" : "guess-out");
+                        result += `<span class="letter ${spanClass}">${guess[i]}</span>`;
+                    }
 
-                        let result = '';
-                        let remaining_word = word;
-                        let correct_indices = new Array(word.length).fill(false);
+                    // Fill in the result in the first blank row
+                    guessTableBodyEl.children[maxGuesses - remaining - 1].children[0].innerHTML = result;
 
-                        // Build result string
-                        for (let i = 0; i < word.length; i++) {
-                            if (remaining_word[i] === guess[i]) {
-                                correct_indices[i] = true;
-                                remaining_word = remaining_word.replaceAt(i, '?');
-                            }
-                        }
+                    // Check for game over and redirect to results if necessary
+                    if (guess === word || remaining === 0) {
+                        submitBtnEl.disabled = true;
+                        currentGuessEl.disabled = true;
 
-                        console.log(remaining_word);
+                        const resultsUrl = new URL(`${baseUrl}/results`);
+                        resultsUrl.searchParams.append('win', guess === word);
+                        resultsUrl.searchParams.append('word', originalWord);
+                        resultsUrl.searchParams.append('guesses', maxGuesses - remaining);
 
-                        // Build result string
-                        for (let i = 0; i < word.length; i++) {
-                            if (correct_indices[i]) {
-                                result += '<span class="letter guess-on">' + guess[i] + '</span>';
-                            } else if (remaining_word.includes(guess[i])) {
-                                result += '<span class="letter guess-in">' + guess[i] + '</span>';
-                            } else {
-                                result += '<span class="letter guess-out">' + guess[i] + '</span>';
-                            }
-                        }
-
-
-                        // Fill in the result in the first blank row
-                        tbody.children[data.guesses - remaining - 1].children[0].innerHTML = result;
-
-                        // Check for game over
-                        if (guess === word || remaining === 0) {
-                            // Disable inputs
-                            document.getElementById('submit').disabled = true;
-                            document.getElementById('current-guess').disabled = true;
-
-                            redirectToResults(guess === word, word, max_guesses - remaining);
-                        }
-                    });
+                        window.location.href = resultsUrl.href;
+                    }
+                });
 
                 addAllBadges(word);
             });
-
-        function redirectToResults(win, word, guesses) {
-            let resultsUrl = new URL(baseUrl + '/results');
-            resultsUrl.searchParams.append('win', win);
-            resultsUrl.searchParams.append('word', word);
-            resultsUrl.searchParams.append('guesses', guesses);
-
-            // This will redirect the user to results.html
-            window.location.href = resultsUrl.href;
-        }
-
-        String.prototype.replaceAt = function (index, replacement) {
-            return this.substring(0, index) + replacement + this.substring(index + replacement.length);
-        }
     </script>
 
 {% endblock %}
