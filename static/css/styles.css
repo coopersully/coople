@@ -82,6 +82,7 @@
     line-height: 1;
     overflow: hidden;
     box-sizing: border-box;
+    font-weight: bolder;
 }
 
 .letter:hover {
