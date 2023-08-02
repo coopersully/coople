@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <!-- JS for game logic -->
+    <!-- Game logic -->
     <script>
         // Construct base URL for backend requests
         let baseUrl = window.location.protocol + '//' + window.location.host;
@@ -84,49 +84,64 @@
                 document.getElementById('remaining').textContent = remaining;
 
                 // Define action on "Submit" button click
-                document.getElementById('submit').addEventListener('click', function () {
+                document.getElementById('submit').addEventListener('click',
+                    function () {
 
-                    // Get the guess from the input field
-                    let guess = document.getElementById('current-guess').value.toLowerCase();
+                        // Get the guess from the input field
+                        let guess = document.getElementById('current-guess').value.toLowerCase();
 
-                    // Clear the guess input
-                    document.getElementById('current-guess').value = '';
+                        // Clear the guess input
+                        document.getElementById('current-guess').value = '';
 
-                    // Validate the input
-                    if (!guess || guess.length !== word.length) {
-                        alert('Invalid guess. Please enter a ' + word.length + '-letter word.');
-                        return;
-                    }
-
-                    // Decrease remaining guesses count
-                    remaining -= 1;
-                    // Update remaining guesses display
-                    document.getElementById('remaining').textContent = remaining;
-
-                    let result = '';
-                    // Build result string
-                    for (let i = 0; i < word.length; i++) {
-                        if (word[i] === guess[i]) {
-                            result += '<span class="letter guess-on">' + guess[i] + '</span>';
-                        } else if (word.includes(guess[i])) {
-                            result += '<span class="letter guess-in">' + guess[i] + '</span>';
-                        } else {
-                            result += '<span class="letter guess-out">' + guess[i] + '</span>';
+                        // Validate the input
+                        if (!guess || guess.length !== word.length) {
+                            alert('Invalid guess. Please enter a ' + word.length + '-letter word.');
+                            return;
                         }
-                    }
 
-                    // Fill in the result in the first blank row
-                    tbody.children[data.guesses - remaining - 1].children[0].innerHTML = result;
+                        // Decrease remaining guesses count
+                        remaining -= 1;
+                        // Update remaining guesses display
+                        document.getElementById('remaining').textContent = remaining;
 
-                    // Check for game over
-                    if (guess === word || remaining === 0) {
-                        // Disable inputs
-                        document.getElementById('submit').disabled = true;
-                        document.getElementById('current-guess').disabled = true;
+                        let result = '';
+                        let remaining_word = word;
+                        let correct_indices = new Array(word.length).fill(false);
 
-                        redirectToResults(guess === word, word, max_guesses - remaining);
-                    }
-                });
+                        // Build result string
+                        for (let i = 0; i < word.length; i++) {
+                            if (remaining_word[i] === guess[i]) {
+                                correct_indices[i] = true;
+                                remaining_word = remaining_word.replaceAt(i, '?');
+                            }
+                        }
+
+                        console.log(remaining_word);
+
+                        // Build result string
+                        for (let i = 0; i < word.length; i++) {
+                            if (correct_indices[i]) {
+                                result += '<span class="letter guess-on">' + guess[i] + '</span>';
+                            } else if (remaining_word.includes(guess[i])) {
+                                result += '<span class="letter guess-in">' + guess[i] + '</span>';
+                            } else {
+                                result += '<span class="letter guess-out">' + guess[i] + '</span>';
+                            }
+                        }
+
+
+                        // Fill in the result in the first blank row
+                        tbody.children[data.guesses - remaining - 1].children[0].innerHTML = result;
+
+                        // Check for game over
+                        if (guess === word || remaining === 0) {
+                            // Disable inputs
+                            document.getElementById('submit').disabled = true;
+                            document.getElementById('current-guess').disabled = true;
+
+                            redirectToResults(guess === word, word, max_guesses - remaining);
+                        }
+                    });
 
                 addAllBadges(word);
             });
@@ -140,5 +155,10 @@
             // This will redirect the user to results.html
             window.location.href = resultsUrl.href;
         }
+
+        String.prototype.replaceAt = function (index, replacement) {
+            return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+        }
     </script>
+
 {% endblock %}
