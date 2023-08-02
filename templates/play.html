@@ -119,7 +119,7 @@
                     }
 
                     // Replace spaces with non-breaking spaces
-                    result = result.replace('> <', '>&nbsp;<');
+                    result = result.replaceAll('> <', '>&nbsp;<');
 
                     // Fill in the result in the first blank row
                     guessTableBodyEl.children[maxGuesses - remaining - 1].children[0].innerHTML = result;
