@@ -62,11 +62,11 @@ function addAllBadges(word) {
 
         if (word === numbersMatch.join('')) {
             addBadge('Only Numbers');
+        } else {
+            addBadge('Alphanumeric');
         }
-    }
-
-    if (!specialCharsMatch && !numbersMatch) {
-        addBadge('Alphanumeric');
+    } else {
+        addBadge('Alphabetical');
     }
 
     if (/^[!@#$%^&*(),.?":{}|<>]/.test(word)) {
