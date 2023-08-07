@@ -3,41 +3,45 @@
 {% block content %}
     <h1 class="display-4 text-center cooplify mt-4" id="title"></h1>
     <form method="POST" onsubmit="event.preventDefault(); generateUrl();">
-        <div class="form-group">
+
+        <div class="form-group mx-2 my-2">
             <label for="name">Your Name</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="John Appleseed" required>
         </div>
-        <div class="form-group">
+
+        <div class="form-group mx-2 my-2">
             <label for="word">Secret Word</label>
             <input type="text" class="form-control" id="word" name="word" oninput="updateGuesses()"
                    placeholder="Sunglasses" required>
         </div>
-        <div class="form-group row">
 
-            <div class="col-sm-8">
-                <label for="guesses">Maximum Guesses Allowed</label>
-                <input type="number" class="form-control" id="guesses" name="guesses" value="5" disabled required>
-                <small class="form-text text-muted">Our algorithm ensures a fair game with custom guess counts.</small>
-            </div>
-
-            <div class="col-sm-4 align-self-center">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="customizeGuesses"
-                           onchange="customizeGuessesChange()">
-                    <label class="form-check-label" for="customizeGuesses">Customize Maximum Guesses Allowed</label>
-                </div>
-            </div>
-
+        <div class="form-group mx-2 my-2">
+            <label for="guesses">Maximum Guesses Allowed</label>
+            <input type="number" class="form-control" id="guesses" name="guesses" value="5" disabled required>
+            <small class="form-text text-muted">Our algorithm ensures a fair game with custom guess counts.</small>
         </div>
-        <div class="form-group">
+
+        <div class="form-group mx-2 my-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="customizeGuesses"
+                       onchange="customizeGuessesChange()">
+                <label class="form-check-label" for="customizeGuesses">Customize Maximum Guesses Allowed</label>
+            </div>
+        </div>
+
+        <div class="form-group mx-2 my-2">
             <label for="hint">Hint</label>
             <input type="text" class="form-control" id="hint" name="hint"
                    placeholder="They protect your eyes from the sun.">
         </div>
 
-        <button type="button" class="btn btn-primary btn-coople rounded-pill" onclick="generateUrl()">Generate Coople</button>
+        <button type="button" class="btn btn-primary btn-coople rounded-pill mx-2 my-2" onclick="generateUrl()">Generate
+            Coople
+        </button>
 
-        <div class="form-group mt-4">
+        <hr/>
+
+        <div class="form-group mx-2 my-2">
             <label for="gameUrl">Your Coople's URL</label>
             <div class="input-group">
                 <input type="text" class="form-control" id="gameUrl" readonly>
@@ -48,11 +52,12 @@
                             class="fas fa-external-link-alt"></i></button>
                 </div>
             </div>
-            <small class="form-text text-muted">If you make changes, be sure to re-generate your Coople's link above.</small>
+            <small class="form-text text-muted">If you make changes, be sure to re-generate your Coople's link
+                above.</small>
         </div>
     </form>
-
-    <div class="container text-center" id="badges"> </div>
+    
+    <div class="container text-center" id="badges"></div>
 
     <script>
 
