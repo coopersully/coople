@@ -55,8 +55,8 @@ def daily():
     # Encode the params
     params = {
         'name': 'Daily Coople',
-        'word': puzzle_of_day['word'],
-        'guesses': len(puzzle_of_day['word']) + 1,
+        'word': puzzle_of_day['secret'],
+        'guesses': len(puzzle_of_day['secret']) + 1,
         'hint': puzzle_of_day['hint'],
         'suffix': 0,
     }
