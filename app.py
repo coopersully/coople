@@ -1,4 +1,5 @@
 import base64
+from random import randint
 from datetime import datetime
 
 from flask import Flask, render_template, request, jsonify, json, redirect
@@ -58,6 +59,29 @@ def daily():
         'word': puzzle_of_day['secret'],
         'guesses': len(puzzle_of_day['secret']) + 1,
         'hint': puzzle_of_day['hint'],
+        'suffix': 0,
+    }
+    encoded_params = base64.urlsafe_b64encode(json.dumps(params).encode()).decode()
+
+    # Redirect to the play route with the word and hint of the day
+    return redirect(f"/play?data={encoded_params}", code=302)
+
+
+@app.route('/random/')
+def random():
+    # Open the puzzles file and load data as a list of dictionaries
+    with open('static/puzzles_random.json', 'r') as file:
+        puzzles = json.load(file)
+
+    # Make sure we wrap around to the start of the list if we've exceeded its length
+    random_puzzle = puzzles[randint(0, len(puzzles) - 1)]
+
+    # Encode the params
+    params = {
+        'name': 'Random Coople',
+        'word': random_puzzle['secret'],
+        'guesses': len(random_puzzle['secret']) + 1,
+        'hint': random_puzzle['hint'],
         'suffix': 0,
     }
     encoded_params = base64.urlsafe_b64encode(json.dumps(params).encode()).decode()
