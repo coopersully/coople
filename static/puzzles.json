@@ -1,143 +1,566 @@
 [
-  { "secret": "airplane", "hint": "" },
-  { "secret": "banana", "hint": "" },
-  { "secret": "camel", "hint": "" },
-  { "secret": "dolphin", "hint": "" },
-  { "secret": "elephant", "hint": "" },
-  { "secret": "frisbee", "hint": "" },
-  { "secret": "grapefruit", "hint": "" },
-  { "secret": "hamburger", "hint": "" },
-  { "secret": "ice cream", "hint": "" },
-  { "secret": "jellyfish", "hint": "" },
-  { "secret": "kangaroo", "hint": "" },
-  { "secret": "lemonade", "hint": "" },
-  { "secret": "mongoose", "hint": "" },
-  { "secret": "nachos", "hint": "" },
-  { "secret": "octopus", "hint": "" },
-  { "secret": "pineapple", "hint": "" },
-  { "secret": "quokka", "hint": "" },
-  { "secret": "raspberry", "hint": "" },
-  { "secret": "sandwich", "hint": "" },
-  { "secret": "tortoise", "hint": "" },
-  { "secret": "umbrella", "hint": "" },
-  { "secret": "volleyball", "hint": "" },
-  { "secret": "watermelon", "hint": "" },
-  { "secret": "xylophone", "hint": "" },
-  { "secret": "yoghurt", "hint": "" },
-  { "secret": "zebra", "hint": "" },
-  { "secret": "love", "hint": "Strong emotion." },
-  { "secret": "peace", "hint": "Absence of conflict." },
-  { "secret": "joy", "hint": "Happiness and delight." },
-  { "secret": "happiness", "hint": "State of contentment." },
-  { "secret": "serenity", "hint": "Tranquility and calmness." },
-  { "secret": "surprise", "hint": "Unexpected event." },
-  { "secret": "sadness", "hint": "Feeling of sorrow." },
-  { "secret": "anger", "hint": "Emotion of fury." },
-  { "secret": "fear", "hint": "Feeling of dread." },
-  { "secret": "trust", "hint": "Reliance and confidence." },
-  { "secret": "anticipation", "hint": "Eager expectation." },
-  { "secret": "disgust", "hint": "Strong aversion." },
-  { "secret": "honesty", "hint": "Truthfulness." },
-  { "secret": "kindness", "hint": "Acting with compassion." },
-  { "secret": "bravery", "hint": "Courageousness." },
-  { "secret": "calm", "hint": "Peaceful state." },
-  { "secret": "delight", "hint": "Extreme pleasure." },
-  { "secret": "eagerness", "hint": "Enthusiastic anticipation." },
-  { "secret": "friendship", "hint": "Bond between friends." },
-  { "secret": "gratitude", "hint": "Thankfulness." },
-  { "secret": "harmony", "hint": "Unity and agreement." },
-  { "secret": "imagination", "hint": "Creative thinking." },
-  { "secret": "jubilation", "hint": "Exultant celebration." },
-  { "secret": "knowledge", "hint": "Information and understanding." },
-  { "secret": "loyalty", "hint": "Faithfulness and allegiance." },
-  { "secret": "modesty", "hint": "Humility and lack of arrogance." },
-  { "secret": "nobility", "hint": "Dignity and honor." },
-  { "secret": "optimism", "hint": "Positive outlook." },
-  { "secret": "patience", "hint": "Endurance and tolerance." },
-  { "secret": "quiet", "hint": "Silent and peaceful." },
-  { "secret": "respect", "hint": "Admiration and esteem." },
-  { "secret": "sympathy", "hint": "Understanding and compassion." },
-  { "secret": "truth", "hint": "Fact or reality." },
-  { "secret": "unity", "hint": "Oneness and togetherness." },
-  { "secret": "victory", "hint": "Triumph and success." },
-  { "secret": "wisdom", "hint": "Deep understanding." },
-  { "secret": "xenophilia", "hint": "" },
-  { "secret": "youth", "hint": "Early stage of life." },
-  { "secret": "zeal", "hint": "Passion and enthusiasm." },
-  { "secret": "good morning", "hint": "" },
-  { "secret": "happy birthday", "hint": "" },
-  { "secret": "merry christmas", "hint": "" },
-  { "secret": "happy new year", "hint": "" },
-  { "secret": "thank you", "hint": "" },
-  { "secret": "sorry", "hint": "" },
-  { "secret": "excuse me", "hint": "" },
-  { "secret": "good night", "hint": "" },
-  { "secret": "nice to meet you", "hint": "" },
-  { "secret": "see you later", "hint": "" },
-  { "secret": "take care", "hint": "" },
-  { "secret": "best wishes", "hint": "" },
-  { "secret": "safe travels", "hint": "" },
-  { "secret": "bon appetite", "hint": "" },
-  { "secret": "congratulations", "hint": "" },
-  { "secret": "welcome back", "hint": "" },
-  { "secret": "get well soon", "hint": "" },
-  { "secret": "good luck", "hint": "" },
-  { "secret": "happy anniversary", "hint": "" },
-  { "secret": "happy holidays", "hint": "" },
-  { "secret": "i miss you", "hint": "" },
-  { "secret": "i love you", "hint": "" },
-  { "secret": "how are you", "hint": "" },
-  { "secret": "what is your name", "hint": "" },
-  { "secret": "where is the bathroom", "hint": "" },
-  { "secret": "do you speak english", "hint": "" },
-  { "secret": "i dont understand", "hint": "" },
-  { "secret": "please speak slowly", "hint": "" },
-  { "secret": "can you help me", "hint": "" },
-  { "secret": "how much does it cost", "hint": "" },
-  { "secret": "where is the nearest hospital", "hint": "" },
-  { "secret": "apple pie", "hint": "" },
-  { "secret": "banana bread", "hint": "" },
-  { "secret": "chocolate cake", "hint": "" },
-  { "secret": "donut", "hint": "" },
-  { "secret": "egg tart", "hint": "" },
-  { "secret": "french fries", "hint": "" },
-  { "secret": "ginger cookies", "hint": "" },
-  { "secret": "hot dog", "hint": "" },
-  { "secret": "ice cream sandwich", "hint": "" },
-  { "secret": "jam tart", "hint": "" },
-  { "secret": "kiwi smoothie", "hint": "" },
-  { "secret": "lemon cake", "hint": "" },
-  { "secret": "mango pudding", "hint": "Tropically jiggly." },
-  { "secret": "nougat", "hint": "Nutty but sweet." },
-  { "secret": "orange juice", "hint": "" },
-  { "secret": "pancakes", "hint": "" },
-  { "secret": "quiche", "hint": "" },
-  { "secret": "raspberry pie", "hint": "" },
-  { "secret": "strawberry milkshake", "hint": "" },
-  { "secret": "taco", "hint": "" },
-  { "secret": "vanilla ice cream", "hint": "Classic and creamy." },
-  { "secret": "waffle", "hint": "" },
-  { "secret": "xmas pudding", "hint": "" },
-  { "secret": "yellow cake", "hint": "" },
-  { "secret": "zucchini bread", "hint": "Healthy and green." },
-  { "secret": "one hundred dollars", "hint": "" },
-  { "secret": "two birds with one stone", "hint": "" },
-  { "secret": "three blind mice", "hint": "" },
-  { "secret": "four leaf clover", "hint": "" },
-  { "secret": "five star hotel", "hint": "" },
-  { "secret": "sixth sense", "hint": "" },
-  { "secret": "seven wonders of the world", "hint": "" },
-  { "secret": "nine lives of a cat", "hint": "" },
-  { "secret": "ten pin bowling", "hint": "" },
-  { "secret": "once upon a time", "hint": "" },
-  { "secret": "twice the fun", "hint": "" },
-  { "secret": "wake up", "hint": "" },
-  { "secret": "nothing is real", "hint": "A statement about existence." },
-  { "secret": "nectarine", "hint": "" },
-  { "secret": "level up", "hint": "" },
-  { "secret": "ligament", "hint": "" },
-  { "secret": "altitude", "hint": "" },
-  { "secret": "zen", "hint": "" },
-  { "secret": "positive", "hint": "" },
-  { "secret": "panic", "hint": "" }
+  {
+    "secret": "airplane",
+    "hint": ""
+  },
+  {
+    "secret": "banana",
+    "hint": ""
+  },
+  {
+    "secret": "camel",
+    "hint": ""
+  },
+  {
+    "secret": "dolphin",
+    "hint": ""
+  },
+  {
+    "secret": "elephant",
+    "hint": ""
+  },
+  {
+    "secret": "frisbee",
+    "hint": ""
+  },
+  {
+    "secret": "grapefruit",
+    "hint": ""
+  },
+  {
+    "secret": "hamburger",
+    "hint": ""
+  },
+  {
+    "secret": "ice cream",
+    "hint": ""
+  },
+  {
+    "secret": "jellyfish",
+    "hint": ""
+  },
+  {
+    "secret": "kangaroo",
+    "hint": ""
+  },
+  {
+    "secret": "lemonade",
+    "hint": ""
+  },
+  {
+    "secret": "mongoose",
+    "hint": ""
+  },
+  {
+    "secret": "nachos",
+    "hint": ""
+  },
+  {
+    "secret": "octopus",
+    "hint": ""
+  },
+  {
+    "secret": "pineapple",
+    "hint": ""
+  },
+  {
+    "secret": "quokka",
+    "hint": ""
+  },
+  {
+    "secret": "raspberry",
+    "hint": ""
+  },
+  {
+    "secret": "sandwich",
+    "hint": ""
+  },
+  {
+    "secret": "tortoise",
+    "hint": ""
+  },
+  {
+    "secret": "umbrella",
+    "hint": ""
+  },
+  {
+    "secret": "volleyball",
+    "hint": ""
+  },
+  {
+    "secret": "watermelon",
+    "hint": ""
+  },
+  {
+    "secret": "xylophone",
+    "hint": ""
+  },
+  {
+    "secret": "yoghurt",
+    "hint": ""
+  },
+  {
+    "secret": "zebra",
+    "hint": ""
+  },
+  {
+    "secret": "love",
+    "hint": "Strong emotion."
+  },
+  {
+    "secret": "peace",
+    "hint": "Absence of conflict."
+  },
+  {
+    "secret": "joy",
+    "hint": "Happiness and delight."
+  },
+  {
+    "secret": "happiness",
+    "hint": "State of contentment."
+  },
+  {
+    "secret": "serenity",
+    "hint": "Tranquility and calmness."
+  },
+  {
+    "secret": "surprise",
+    "hint": "Unexpected event."
+  },
+  {
+    "secret": "sadness",
+    "hint": "Feeling of sorrow."
+  },
+  {
+    "secret": "anger",
+    "hint": "Emotion of fury."
+  },
+  {
+    "secret": "fear",
+    "hint": "Feeling of dread."
+  },
+  {
+    "secret": "trust",
+    "hint": "Reliance and confidence."
+  },
+  {
+    "secret": "anticipation",
+    "hint": "Eager expectation."
+  },
+  {
+    "secret": "disgust",
+    "hint": "Strong aversion."
+  },
+  {
+    "secret": "honesty",
+    "hint": "Truthfulness."
+  },
+  {
+    "secret": "kindness",
+    "hint": "Acting with compassion."
+  },
+  {
+    "secret": "bravery",
+    "hint": "Courageousness."
+  },
+  {
+    "secret": "calm",
+    "hint": "Peaceful state."
+  },
+  {
+    "secret": "delight",
+    "hint": "Extreme pleasure."
+  },
+  {
+    "secret": "eagerness",
+    "hint": "Enthusiastic anticipation."
+  },
+  {
+    "secret": "friendship",
+    "hint": "Bond between friends."
+  },
+  {
+    "secret": "gratitude",
+    "hint": "Thankfulness."
+  },
+  {
+    "secret": "harmony",
+    "hint": "Unity and agreement."
+  },
+  {
+    "secret": "imagination",
+    "hint": "Creative thinking."
+  },
+  {
+    "secret": "jubilation",
+    "hint": "Exultant celebration."
+  },
+  {
+    "secret": "knowledge",
+    "hint": "Information and understanding."
+  },
+  {
+    "secret": "loyalty",
+    "hint": "Faithfulness and allegiance."
+  },
+  {
+    "secret": "modesty",
+    "hint": "Humility and lack of arrogance."
+  },
+  {
+    "secret": "nobility",
+    "hint": "Dignity and honor."
+  },
+  {
+    "secret": "optimism",
+    "hint": "Positive outlook."
+  },
+  {
+    "secret": "patience",
+    "hint": "Endurance and tolerance."
+  },
+  {
+    "secret": "quiet",
+    "hint": "Silent and peaceful."
+  },
+  {
+    "secret": "respect",
+    "hint": "Admiration and esteem."
+  },
+  {
+    "secret": "sympathy",
+    "hint": "Understanding and compassion."
+  },
+  {
+    "secret": "truth",
+    "hint": "Fact or reality."
+  },
+  {
+    "secret": "unity",
+    "hint": "Oneness and togetherness."
+  },
+  {
+    "secret": "victory",
+    "hint": "Triumph and success."
+  },
+  {
+    "secret": "wisdom",
+    "hint": "Deep understanding."
+  },
+  {
+    "secret": "xenophilia",
+    "hint": ""
+  },
+  {
+    "secret": "youth",
+    "hint": "Early stage of life."
+  },
+  {
+    "secret": "zeal",
+    "hint": "Passion and enthusiasm."
+  },
+  {
+    "secret": "good morning",
+    "hint": ""
+  },
+  {
+    "secret": "happy birthday",
+    "hint": ""
+  },
+  {
+    "secret": "merry christmas",
+    "hint": ""
+  },
+  {
+    "secret": "happy new year",
+    "hint": ""
+  },
+  {
+    "secret": "thank you",
+    "hint": ""
+  },
+  {
+    "secret": "sorry",
+    "hint": ""
+  },
+  {
+    "secret": "excuse me",
+    "hint": ""
+  },
+  {
+    "secret": "good night",
+    "hint": ""
+  },
+  {
+    "secret": "nice to meet you",
+    "hint": ""
+  },
+  {
+    "secret": "see you later",
+    "hint": ""
+  },
+  {
+    "secret": "take care",
+    "hint": ""
+  },
+  {
+    "secret": "best wishes",
+    "hint": ""
+  },
+  {
+    "secret": "safe travels",
+    "hint": ""
+  },
+  {
+    "secret": "bon appetite",
+    "hint": ""
+  },
+  {
+    "secret": "congratulations",
+    "hint": ""
+  },
+  {
+    "secret": "welcome back",
+    "hint": ""
+  },
+  {
+    "secret": "get well soon",
+    "hint": ""
+  },
+  {
+    "secret": "good luck",
+    "hint": ""
+  },
+  {
+    "secret": "happy anniversary",
+    "hint": ""
+  },
+  {
+    "secret": "happy holidays",
+    "hint": ""
+  },
+  {
+    "secret": "i miss you",
+    "hint": ""
+  },
+  {
+    "secret": "i love you",
+    "hint": ""
+  },
+  {
+    "secret": "how are you",
+    "hint": ""
+  },
+  {
+    "secret": "what is your name",
+    "hint": ""
+  },
+  {
+    "secret": "where is the bathroom",
+    "hint": ""
+  },
+  {
+    "secret": "do you speak english",
+    "hint": ""
+  },
+  {
+    "secret": "i dont understand",
+    "hint": ""
+  },
+  {
+    "secret": "please speak slowly",
+    "hint": ""
+  },
+  {
+    "secret": "can you help me",
+    "hint": ""
+  },
+  {
+    "secret": "how much does it cost",
+    "hint": ""
+  },
+  {
+    "secret": "where is the nearest hospital",
+    "hint": ""
+  },
+  {
+    "secret": "apple pie",
+    "hint": ""
+  },
+  {
+    "secret": "banana bread",
+    "hint": ""
+  },
+  {
+    "secret": "chocolate cake",
+    "hint": ""
+  },
+  {
+    "secret": "donut",
+    "hint": ""
+  },
+  {
+    "secret": "egg tart",
+    "hint": ""
+  },
+  {
+    "secret": "french fries",
+    "hint": ""
+  },
+  {
+    "secret": "ginger cookies",
+    "hint": ""
+  },
+  {
+    "secret": "hot dog",
+    "hint": ""
+  },
+  {
+    "secret": "ice cream sandwich",
+    "hint": ""
+  },
+  {
+    "secret": "jam tart",
+    "hint": ""
+  },
+  {
+    "secret": "kiwi smoothie",
+    "hint": ""
+  },
+  {
+    "secret": "lemon cake",
+    "hint": ""
+  },
+  {
+    "secret": "mango pudding",
+    "hint": "Tropically jiggly."
+  },
+  {
+    "secret": "nougat",
+    "hint": "Nutty but sweet."
+  },
+  {
+    "secret": "orange juice",
+    "hint": ""
+  },
+  {
+    "secret": "pancakes",
+    "hint": ""
+  },
+  {
+    "secret": "quiche",
+    "hint": ""
+  },
+  {
+    "secret": "raspberry pie",
+    "hint": ""
+  },
+  {
+    "secret": "strawberry milkshake",
+    "hint": ""
+  },
+  {
+    "secret": "taco",
+    "hint": ""
+  },
+  {
+    "secret": "vanilla ice cream",
+    "hint": "Classic and creamy."
+  },
+  {
+    "secret": "waffle",
+    "hint": ""
+  },
+  {
+    "secret": "xmas pudding",
+    "hint": ""
+  },
+  {
+    "secret": "yellow cake",
+    "hint": ""
+  },
+  {
+    "secret": "zucchini bread",
+    "hint": "Healthy and green."
+  },
+  {
+    "secret": "one hundred dollars",
+    "hint": ""
+  },
+  {
+    "secret": "two birds with one stone",
+    "hint": ""
+  },
+  {
+    "secret": "three blind mice",
+    "hint": ""
+  },
+  {
+    "secret": "four leaf clover",
+    "hint": ""
+  },
+  {
+    "secret": "five star hotel",
+    "hint": ""
+  },
+  {
+    "secret": "sixth sense",
+    "hint": ""
+  },
+  {
+    "secret": "seven wonders of the world",
+    "hint": ""
+  },
+  {
+    "secret": "nine lives of a cat",
+    "hint": ""
+  },
+  {
+    "secret": "ten pin bowling",
+    "hint": ""
+  },
+  {
+    "secret": "once upon a time",
+    "hint": ""
+  },
+  {
+    "secret": "twice the fun",
+    "hint": ""
+  },
+  {
+    "secret": "wake up",
+    "hint": ""
+  },
+  {
+    "secret": "nothing is real",
+    "hint": "A statement about existence."
+  },
+  {
+    "secret": "nectarine",
+    "hint": ""
+  },
+  {
+    "secret": "level up",
+    "hint": ""
+  },
+  {
+    "secret": "ligament",
+    "hint": ""
+  },
+  {
+    "secret": "altitude",
+    "hint": ""
+  },
+  {
+    "secret": "zen",
+    "hint": ""
+  },
+  {
+    "secret": "positive",
+    "hint": ""
+  },
+  {
+    "secret": "panic",
+    "hint": ""
+  }
 ]

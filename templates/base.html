@@ -11,14 +11,18 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
 
-    <link href="/static/css/styles.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/badges.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/buttons.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/fonts.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/tiles.css" rel="stylesheet" type="text/css">
+
 
     <script src="/static/js/badges.js"></script>
     <script src="/static/js/colorizer.js"></script>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light cooplify">
     <a class="navbar-brand d-lg-none" href="#">
         <img src="/static/images/coople.svg" width="100" height="100" alt="Coople">
     </a>
@@ -28,14 +32,23 @@
     </button>
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item">
+            <li class="nav-item {% if request.endpoint == 'home' %}active{% endif %} mx-4">
                 <a class="nav-link" href="{{ url_for('home') }}">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('daily') }}">Daily</a>
+            <li class="nav-item {% if request.endpoint == 'create' %}active{% endif %} mx-4">
+                <a class="nav-link" href="{{ url_for('create') }}">Create</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('create') }}">Make your own</a>
+            <li class="nav-item dropdown {% if request.endpoint == 'play' %}active{% endif %} mx-4">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Play
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item"
+                       href="{{ url_for('daily') }}">Daily</a>
+                    <a class="dropdown-item"
+                       href="{{ url_for('random') }}">Random</a>
+                </div>
             </li>
         </ul>
     </div>
