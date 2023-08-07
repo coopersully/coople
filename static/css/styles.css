@@ -47,6 +47,7 @@
     z-index: -1;
     background-size: 200% auto;
     background-image: linear-gradient(45deg, #FF6961, #FFB347, #FDFD96, #77DD77, #42A5F5, #5C6BC0, #AB47BC, #EC407A, #26A69A, #9CCC65, #D4E157, #FFEE58, #FFCA28, #FF7043, #8D6E63, #BDBDBD);
+    opacity: 0.5;
     filter: blur(20px); /* apply the blur here */
 }
 
