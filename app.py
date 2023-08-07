@@ -45,24 +45,24 @@ def daily():
     # Get current day of the year
     day_of_year = datetime.now().timetuple().tm_yday
 
-    # Open the words file
-    with open('static/cooples.txt', 'r') as file:
-        words = file.read().splitlines()
+    # Open the puzzles file and load data as a list of dictionaries
+    with open('static/puzzles.json', 'r') as file:
+        puzzles = json.load(file)
 
     # Make sure we wrap around to the start of the list if we've exceeded its length
-    word_of_day = words[day_of_year % len(words)]
+    puzzle_of_day = puzzles[day_of_year % len(puzzles)]
 
     # Encode the params
     params = {
         'name': 'Daily Coople',
-        'word': word_of_day,
-        'guesses': len(word_of_day) + 1,
-        'hint': 'This is the daily challenge- so there are no hints. Good luck!',
+        'word': puzzle_of_day['word'],
+        'guesses': len(puzzle_of_day['word']) + 1,
+        'hint': puzzle_of_day['hint'],
         'suffix': 0,
     }
     encoded_params = base64.urlsafe_b64encode(json.dumps(params).encode()).decode()
 
-    # Redirect to the play route with the word of the day
+    # Redirect to the play route with the word and hint of the day
     return redirect(f"/play?data={encoded_params}", code=302)
 
 
