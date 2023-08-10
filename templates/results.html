@@ -2,10 +2,11 @@
 
 {% block content %}
 
-    <div class="container py-5 d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="container py-5 d-flex justify-content-center align-items-center"
+         style="min-height: calc(100vh - 200px)">
         <div class="position-relative">
-            <div class="jumbotron text-center p-5 bg-white rounded-3"
-                 style="-webkit-box-shadow: 0 0 25px -10px rgba(31,31,31,0.25); -moz-box-shadow: 0 0 25px -10px rgba(31,31,31,0.25); box-shadow: 0 0 25px -10px rgba(31,31,31,0.25);">
+            <div class="jumbotron text-center p-5 bg-white"
+                 style="-webkit-box-shadow: 0 0 25px -10px rgba(31,31,31,0.25); -moz-box-shadow: 0 0 25px -10px rgba(31,31,31,0.25); box-shadow: 0 0 25px -10px rgba(31,31,31,0.25); border-radius: 50px">
                 <p class="col-md-8 fs-4 mx-auto">The solution was...</p>
                 <h1 class="display-1 fw-bold cooplify text-wrap" id="word"></h1>
                 <h1 class="display-5 fw-bold" id="results-message"></h1>
