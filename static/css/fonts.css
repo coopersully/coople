@@ -6,7 +6,7 @@
 
 .cooplify {
     font-family: 'Overmch', sans-serif;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.25em;
 }
 
 body::before {
@@ -22,4 +22,11 @@ body::before {
     filter: blur(50%);
     z-index: -1; /* Behind the content */
     pointer-events: none; /* Allow clicks to go through */
+}
+
+.elevated-header {
+    -webkit-box-shadow: 0 0 25px -10px rgba(31, 31, 31, 0.25);
+    -moz-box-shadow: 0 0 25px -10px rgba(31, 31, 31, 0.25);
+    box-shadow: 0 0 25px -10px rgba(31, 31, 31, 0.25);
+    border-radius: 50px
 }

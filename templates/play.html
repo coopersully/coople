@@ -1,35 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container">
-        <div class="row justify-content-center text-center">
-            <div class="col-12 col-sm-8 col-md-6">
-                <h1 class="display-4 text-center cooplify mt-4" id="name"></h1>
+    <div class="justify-content-center text-center">
 
-                <p class="text-center bi bi-quote" id="hint"></p>
+        <div class="jumbotron text-center p-5 bg-white elevated-header">
+            <h1 class="display-4 text-center cooplify mt-4" id="name">
+                <!-- Author or title -->
+            </h1>
+
+            <p class="col-md-8 fs-4 mx-auto text-secondary" id="author">
+                <!-- Author or none -->
+            </p>
+
+            <p class="text-center bi bi-quote" id="hint">
+                <!-- Hint or placeholder -->
+            </p>
 
 
-                <div class="container text-center" id="badges"></div>
-
-                <hr/>
-
-                <table class="table letter-table text-center align-bottom" id="guessTable">
-                    <thead>
-                    <tr></tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-
-                <p class="text-center">You have <span id="remaining">?</span> guesses remaining.</p>
-
-                <div id="current-guess-input" class="text-center">
-                </div>
-
-                <button id="submit" class="btn btn-primary btn-coople rounded-pill my-2 mx-2">Submit Guess</button>
-                <button id="surrender" class="btn btn-danger btn-coople rounded-pill my-2 mx-2">Surrender</button>
-
+            <div class="container text-center" id="badges">
+                <!-- Badges -->
             </div>
         </div>
+
+        <table class="table letter-table text-center align-bottom" id="guessTable">
+            <thead></thead>
+            <tbody>
+            <!-- Guesses go here -->
+            </tbody>
+        </table>
+
+        <p class="text-center">You have <span id="remaining">?</span> guesses remaining.</p>
+
+        <div id="current-guess-input" class="text-center">
+        </div>
+
+        <button id="submit" class="btn btn-primary btn-coople rounded-pill my-2 mx-2">Submit Guess</button>
+        <button id="surrender" class="btn btn-danger btn-coople rounded-pill my-2 mx-2">Surrender</button>
+
     </div>
 
     <!-- Game logic -->
@@ -102,8 +109,13 @@
                 });
 
                 // Update name and hint elements
-                nameEl.innerHTML = colorize(suffix === 0 ? name : `${name}'s Coople`);
+                nameEl.innerHTML = colorize(suffix === 0 ? name : `Custom Coople`);
                 hintEl.textContent = hint ?? "No hint provided.";
+
+                // Update author element
+                if (suffix === 1) {
+                    document.getElementById('author').textContent = `Created by ${name}`
+                }
 
                 // Update remaining guesses display
                 remainingEl.textContent = remaining;

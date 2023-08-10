@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="display-4 text-center cooplify mt-4" id="title"></h1>
+    <div class="jumbotron text-center p-5 bg-white elevated-header">
+        <h1 class="display-4 text-center cooplify mt-4" id="title"></h1>
+    </div>
+
     <form method="POST" onsubmit="event.preventDefault(); generateUrl();">
 
         <div class="form-group mx-2 my-2">
@@ -56,7 +59,7 @@
                 above.</small>
         </div>
     </form>
-    
+
     <div class="container text-center" id="badges"></div>
 
     <script>
